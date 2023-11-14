@@ -1,8 +1,13 @@
 fileFormatVersion: 2
+<<<<<<<< Updated upstream:Attendance simulation/Assets/tripolygon/UModeler/Getting Started with UModeler.pdf.meta
 guid: 80704f059ac756c4e97b27ed71044164
 timeCreated: 1593066601
 licenseType: Store
+========
+guid: 22419d976fcbc9d4a9a1f138c3c018ab
+>>>>>>>> Stashed changes:Attendance simulation/Assets/Scenes/YGW.unity.meta
 DefaultImporter:
+  externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
