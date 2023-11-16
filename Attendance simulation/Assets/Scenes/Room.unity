@@ -961,6 +961,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   interactionDistance: 4
+--- !u!1 &326297262 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2070925441746177671, guid: a1a802ecaf6775746bb2a929fb554ad8, type: 3}
+  m_PrefabInstance: {fileID: 1184839565}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &388894300
 GameObject:
   m_ObjectHideFlags: 0
@@ -3387,6 +3392,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1074070104}
   m_CullTransparentMesh: 1
+--- !u!1 &1175534710 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2421349177607974044, guid: 8cb2658a863c3b24182b5f3197160ac3, type: 3}
+  m_PrefabInstance: {fileID: 772911659}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1184839565
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4272,6 +4282,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5bb1f2f71630094f8d376878dfde293, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1175534710}
+  main_camera: {fileID: 273229091}
+  follow_camera: {fileID: 326297262}
 --- !u!1 &1484422167
 GameObject:
   m_ObjectHideFlags: 0
