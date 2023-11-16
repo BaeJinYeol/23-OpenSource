@@ -32,7 +32,8 @@ public class ExampleInteractions : MonoBehaviour
 	{
 		HandleKeyInput ();
 		HandleItemPickUp ();
-		HandlePrismColorChange ();
+		//HandlePrismColorChange ();
+		HandlePrismSceneChange();
 	}
 	#endregion
 
@@ -79,13 +80,13 @@ public class ExampleInteractions : MonoBehaviour
 				blackWhiteLayer.SetActive (!blackWhiteLayer.activeSelf);
 		}
 
-		// toggle day/night scene
-		if (Input.GetKeyUp (KeyCode.Return)) {
-			if (SceneManager.GetActiveScene ().buildIndex == 0)
-				SceneManager.LoadScene (1);
-			else
-				SceneManager.LoadScene (0);
-		}
+		//// toggle day/night scene
+		//if (Input.GetKeyUp (KeyCode.Return)) {
+		//	if (SceneManager.GetActiveScene ().buildIndex == 0)
+		//		SceneManager.LoadScene (1);
+		//	else
+		//		SceneManager.LoadScene (0);
+		//}
 	}
 
 
@@ -155,8 +156,50 @@ public class ExampleInteractions : MonoBehaviour
 		}
 	}
 
+    void HandlePrismSceneChange()
+    {
+        if (!_HUDNavigationSystem.isEnabled)
+            return;
 
-	public void SetInitialPrismColor (HUDNavigationElement element)
+        // check for colored prisms
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, interactionDistance, layerMask) && hit.collider.name.Contains("Prism"))
+        {
+            // get HUD navigation element component
+            HUDNavigationElement element = hit.collider.gameObject.GetComponentInChildren<HUDNavigationElement>();
+            if (element != null)
+            {
+                // show interaction text
+                if (element.Indicator != null)
+                {
+                    interactionText = element.Indicator.GetCustomTransform("interactionText");
+                    if (interactionText != null)
+                        interactionText.gameObject.SetActive(true);
+                }
+
+                // wait for interaction input and change prism color
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+					if (SceneManager.GetActiveScene().buildIndex == 3)
+						SceneManager.LoadScene(2);
+					else if (SceneManager.GetActiveScene().buildIndex == 2)
+						SceneManager.LoadScene(1);
+
+				}
+            }
+        }
+        else
+        {
+            // reset interaction text
+            if (interactionText != null)
+            {
+                interactionText.gameObject.SetActive(false);
+                interactionText = null;
+            }
+        }
+    }
+
+
+    public void SetInitialPrismColor (HUDNavigationElement element)
 	{
 		// get renderer from prism
 		Renderer prismRenderer = element.transform.parent.GetComponent<Renderer> ();
