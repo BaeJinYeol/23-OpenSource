@@ -7,6 +7,6 @@ public class ChangeScene : MonoBehaviour
 {
     public void ClickBtnStart()
     {
-        SceneManager.LoadScene("Room");
+        SceneManager.LoadScene(3);
     }
 }

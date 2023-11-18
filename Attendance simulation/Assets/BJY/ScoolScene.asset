@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4be86cf9aedbab74fb51f5877ba146c2, type: 3}
   m_Name: ScoolScene
   m_EditorClassIdentifier: 
-  overrideRadarSettings: 0
-  overrideCompassBarSettings: 0
+  overrideRadarSettings: 1
+  overrideCompassBarSettings: 1
   overrideIndicatorSettings: 1
-  overrideMinimapSettings: 0
-  useRadar: 1
+  overrideMinimapSettings: 1
+  useRadar: 0
   radarMode: 0
   radarZoom: 1
   radarRadius: 50
@@ -30,7 +30,7 @@ MonoBehaviour:
   useRadarHeightSystem: 1
   radarDistanceAbove: 10
   radarDistanceBelow: 10
-  useCompassBar: 1
+  useCompassBar: 0
   compassBarRadius: 150
   useIndicators: 1
   indicatorRadius: 25
@@ -43,7 +43,7 @@ MonoBehaviour:
   useIndicatorFading: 1
   indicatorFadeRadius: 15
   indicatorMinFade: 0
-  useMinimap: 1
+  useMinimap: 0
   minimapProfile: {fileID: 0}
   minimapMode: 1
   minimapScale: 0.25

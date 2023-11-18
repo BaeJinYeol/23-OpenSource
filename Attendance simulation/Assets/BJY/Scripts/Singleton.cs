@@ -35,8 +35,5 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         {
             DontDestroyOnLoad(this.gameObject);
         }
-        SceneManager.sceneLoaded += OnSceneLoaded;
     }
-
-    public virtual void OnSceneLoaded(Scene arg0, LoadSceneMode arg1) { }
 }

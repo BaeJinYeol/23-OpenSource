@@ -10,7 +10,7 @@ public class SoundManager : Singleton<SoundManager>
     public float bgVolume = 0.1f;
     public float sfxVolume = 0.1f;
 
-    public override void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
+    public void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
         for (int i = 0; i < bglist.Length; i++)
         {

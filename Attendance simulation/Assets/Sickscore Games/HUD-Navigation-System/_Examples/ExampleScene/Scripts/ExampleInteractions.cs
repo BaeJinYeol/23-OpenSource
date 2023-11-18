@@ -162,7 +162,8 @@ public class ExampleInteractions : MonoBehaviour
             return;
 
         // check for colored prisms
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, interactionDistance, layerMask) && hit.collider.name.Contains("Prism"))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, interactionDistance, layerMask) 
+			&& hit.collider.name.Contains("Prism") && GameManager.Instance.isBackpack)
         {
             // get HUD navigation element component
             HUDNavigationElement element = hit.collider.gameObject.GetComponentInChildren<HUDNavigationElement>();
@@ -180,10 +181,17 @@ public class ExampleInteractions : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.E))
                 {
 					if (SceneManager.GetActiveScene().buildIndex == 3)
+					{
 						SceneManager.LoadScene(2);
+					}
 					else if (SceneManager.GetActiveScene().buildIndex == 2)
+					{
 						SceneManager.LoadScene(1);
-
+					}
+					else if (SceneManager.GetActiveScene().buildIndex == 1)
+                    {
+						SceneManager.LoadScene(0);
+                    }
 				}
             }
         }
