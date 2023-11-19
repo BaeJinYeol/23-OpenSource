@@ -133,7 +133,6 @@ namespace SickscoreGames.HUDNavigationSystem
 				Destroy (Minimap.gameObject);
 		}
 
-
 		protected virtual void Refresh ()
 		{
 			this.enabled = false;

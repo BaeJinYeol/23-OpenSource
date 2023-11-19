@@ -10,6 +10,8 @@ public class GameManager : Singleton<GameManager>
     private GameObject player;
 
     public bool isBackpack = false;
+    public bool isHelmet = false;
+    public bool isWatch = false;
 
     private void Start()
     {
@@ -48,11 +50,20 @@ public class GameManager : Singleton<GameManager>
         DontDestroyOnLoad(follow_camera);
         DontDestroyOnLoad(player);
     }
-
     public void TakeBackPack()
     {
         GameObject.Find("mixamorig1:Neck").transform.Find("Backpack").gameObject.SetActive(true);
         isBackpack = true;
+    }
+    public void TakeHelmet()
+    {
+        GameObject.Find("mixamorig1:HeadTop_End").transform.Find("Helmet").gameObject.SetActive(true);
+        isHelmet = true;
+    }
+    public void TakeWatch()
+    {
+        GameObject.Find("mixamorig1:LeftHand").transform.Find("Watch").gameObject.SetActive(true);
+        isWatch = true;
     }
 
     public void SpawnYGW()
@@ -67,10 +78,28 @@ public class GameManager : Singleton<GameManager>
     }
     public void GameOver()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        isBackpack = false;
+        isHelmet = false;
+        isWatch = false;
+
+        TimerManager.Instance.EndTime();
+
         Destroy(player);
         Destroy(follow_camera);
         Destroy(main_camera);
         Destroy(GameObject.Find("[HUD Navigation Canvas]"));
         Destroy(GameObject.Find("[HUD Navigation System]"));
+    }
+
+    public void StartLevel1()
+    {
+        TimerManager.Instance.StartTime(100f);
+        SceneManager.LoadScene(3);
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 }

@@ -16,6 +16,7 @@ public class ExampleInteractions : MonoBehaviour
 
 	private RaycastHit hit;
 	private Transform pickupText;
+	private Transform rideText;
 	private Transform interactionText;
 	private HUDNavigationSystem _HUDNavigationSystem;
 	#endregion
@@ -32,7 +33,7 @@ public class ExampleInteractions : MonoBehaviour
 	{
 		HandleKeyInput ();
 		HandleItemPickUp ();
-		//HandlePrismColorChange ();
+		HandleItemRide ();
 		HandlePrismSceneChange();
 	}
 	#endregion
@@ -79,16 +80,7 @@ public class ExampleInteractions : MonoBehaviour
 			if (blackWhiteLayer != null)
 				blackWhiteLayer.SetActive (!blackWhiteLayer.activeSelf);
 		}
-
-		//// toggle day/night scene
-		//if (Input.GetKeyUp (KeyCode.Return)) {
-		//	if (SceneManager.GetActiveScene ().buildIndex == 0)
-		//		SceneManager.LoadScene (1);
-		//	else
-		//		SceneManager.LoadScene (0);
-		//}
 	}
-
 
 	void HandleItemPickUp ()
 	{
@@ -96,62 +88,83 @@ public class ExampleInteractions : MonoBehaviour
 			return;
 		
 		// check for pickup items
-		if (Physics.Raycast (transform.position, transform.TransformDirection (Vector3.forward), out hit, interactionDistance, layerMask) && hit.collider.name.Contains ("PickUp")) {
+		if (Physics.Raycast (transform.position, transform.TransformDirection (Vector3.forward), out hit, interactionDistance, layerMask) && hit.collider.name.Contains ("PickUp"))
+		{
 			// get HUD navigation element component
 			HUDNavigationElement element = hit.collider.gameObject.GetComponent<HUDNavigationElement> ();
-			if (element != null) {
+			if (element != null) 
+			{
 				// show pickup text
-				if (element.Indicator != null) {
-					pickupText = element.Indicator.GetCustomTransform ("pickupText");
+				if (element.Indicator != null)
+                {
+					pickupText = element.Indicator.GetCustomTransform("pickupText");
 					if (pickupText != null)
-						pickupText.gameObject.SetActive (true);
+						pickupText.gameObject.SetActive(true);
 				}
 
 				// wait for interaction input and destroy gameobject
-				if (Input.GetKeyDown (KeyCode.E))
+				if (Input.GetKeyDown(KeyCode.E))
+                {
 					Destroy (element.gameObject);
+					if (element.gameObject.name == "PickUp BackPack")
+					{
+						GameManager.Instance.TakeBackPack();
+					}
+					else if (element.gameObject.name == "PickUp helmet")
+					{
+						GameManager.Instance.TakeHelmet();
+					}
+					else if (element.gameObject.name == "PickUp Watch")
+					{
+						GameManager.Instance.TakeWatch();
+						TimerManager.Instance.ActiveTime();
+					}
+				}
 			}
 		} else {
 			// reset pickup text
 			if (pickupText != null) {
-				pickupText.gameObject.SetActive (false);
-				pickupText = null;
-			}
+                pickupText.gameObject.SetActive(false);
+                pickupText = null;
+            }
 		}
 	}
 
-
-	void HandlePrismColorChange ()
+	void HandleItemRide()
 	{
 		if (!_HUDNavigationSystem.isEnabled)
 			return;
-		
-		// check for colored prisms
-		if (Physics.Raycast (transform.position, transform.TransformDirection (Vector3.forward), out hit, interactionDistance, layerMask) && hit.collider.name.Contains ("Prism")) {
+
+		// check for pickup items
+		if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, interactionDistance, layerMask) 
+			&& hit.collider.name.Contains("Ride") && GameManager.Instance.isHelmet)
+		{
 			// get HUD navigation element component
-			HUDNavigationElement element = hit.collider.gameObject.GetComponentInChildren<HUDNavigationElement> ();
-			if (element != null) {
-				// show interaction text
-				if (element.Indicator != null) {
-					interactionText = element.Indicator.GetCustomTransform ("interactionText");
-					if (interactionText != null)
-						interactionText.gameObject.SetActive (true);
+			HUDNavigationElement element = hit.collider.gameObject.GetComponent<HUDNavigationElement>();
+			if (element != null)
+			{
+				// show pickup text
+				if (element.Indicator != null)
+				{
+					rideText = element.Indicator.GetCustomTransform("pickupText");
+					if (rideText != null)
+						rideText.gameObject.SetActive(true);
 				}
 
-				// wait for interaction input and change prism color
-				if (Input.GetKeyDown (KeyCode.E)) {
-					// generate random color
-					Color randomColor = Random.ColorHSV (0f, 1f, 1f, 1f, .5f, 1f);
-
-					// change prism color
-					ChangePrismColor (element, randomColor);
-				}
+				// wait for interaction input and destroy gameobject
+				if (Input.GetKeyDown(KeyCode.E))
+                {
+					Destroy(element.gameObject);
+                }
 			}
-		} else {
-			// reset interaction text
-			if (interactionText != null) {
-				interactionText.gameObject.SetActive (false);
-				interactionText = null;
+		}
+		else
+		{
+			// reset pickup text
+			if (rideText != null)
+			{
+				rideText.gameObject.SetActive(false);
+				rideText = null;
 			}
 		}
 	}
@@ -205,46 +218,5 @@ public class ExampleInteractions : MonoBehaviour
             }
         }
     }
-
-
-    public void SetInitialPrismColor (HUDNavigationElement element)
-	{
-		// get renderer from prism
-		Renderer prismRenderer = element.transform.parent.GetComponent<Renderer> ();
-		if (prismRenderer != null)
-			ChangePrismColor (element, prismRenderer.material.color);
-	}
-
-
-	static void ChangePrismColor (HUDNavigationElement element, Color elementColor)
-	{
-		// change radar color
-		if (element.Radar != null)
-			element.Radar.ChangeIconColor (elementColor);
-
-		// change compass bar color
-		if (element.CompassBar != null)
-			element.CompassBar.ChangeIconColor (elementColor);
-
-		// change indicator colors
-		if (element.Indicator != null) {
-			element.Indicator.ChangeIconColor (elementColor);
-			element.Indicator.ChangeOffscreenIconColor (elementColor);
-		}
-
-		// change minimap color
-		if (element.Minimap != null)
-			element.Minimap.ChangeIconColor (elementColor);
-
-		// change prism material color
-		Renderer prismRenderer = element.transform.parent.GetComponent<Renderer> ();
-		if (prismRenderer != null)
-			prismRenderer.material.color = new Color (elementColor.r, elementColor.g, elementColor.b, prismRenderer.material.color.a);
-
-		// change prism light (Night Scene)
-		Light prismLight = element.transform.parent.gameObject.GetComponentInChildren<Light> ();
-		if (prismLight != null)
-			prismLight.color = new Color (elementColor.r, elementColor.g, elementColor.b);
-	}
 	#endregion
 }

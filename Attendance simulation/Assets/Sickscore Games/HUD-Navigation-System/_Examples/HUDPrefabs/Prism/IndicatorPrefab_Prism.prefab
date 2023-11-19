@@ -252,7 +252,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '[E] Go Out'
+  m_Text: '[E] Open Door'
 --- !u!114 &114478745218569148
 MonoBehaviour:
   m_ObjectHideFlags: 0
