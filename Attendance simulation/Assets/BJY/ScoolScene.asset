@@ -34,13 +34,13 @@ MonoBehaviour:
   compassBarRadius: 150
   useIndicators: 1
   indicatorRadius: 25
-  indicatorHideDistance: 3
-  useOffscreenIndicators: 1
+  indicatorHideDistance: 0.8
+  useOffscreenIndicators: 0
   indicatorOffscreenBorder: 0.075
-  useIndicatorScaling: 1
+  useIndicatorScaling: 0
   indicatorScaleRadius: 15
   indicatorMinScale: 0.8
-  useIndicatorFading: 1
+  useIndicatorFading: 0
   indicatorFadeRadius: 15
   indicatorMinFade: 0
   useMinimap: 0

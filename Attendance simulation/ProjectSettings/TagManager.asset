@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CinemachineTarget
   - Backpack
+  - vehicle
   layers:
   - Default
   - TransparentFX

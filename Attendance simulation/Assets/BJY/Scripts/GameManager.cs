@@ -9,9 +9,17 @@ public class GameManager : Singleton<GameManager>
     private GameObject follow_camera;
     private GameObject player;
 
+    private int goalClass;
+    private int level;
+    private bool success_game = false;
+    private bool clear_level1 = false;
+    private bool clear_level2 = false;
+    private bool clear_level3 = false;
+
     public bool isBackpack = false;
     public bool isHelmet = false;
     public bool isWatch = false;
+    public bool isRide = false;
 
     private void Start()
     {
@@ -33,10 +41,6 @@ public class GameManager : Singleton<GameManager>
         else if (scene.name == "School")
         {
             SpawnSchool();
-        }
-        else if (scene.name == "MainMenuScene")
-        {
-            GameOver();
         }
     }
 
@@ -66,6 +70,15 @@ public class GameManager : Singleton<GameManager>
         isWatch = true;
     }
 
+    public void SetGoalClass(ClassRoom cr)
+    {
+        goalClass = cr.GetHashCode();
+    }
+    public string GetGoalClass()
+    {
+        return goalClass.ToString();
+    }
+
     public void SpawnYGW()
     {
         Transform spawnPoint = GameObject.Find("SpawnPoints").transform;
@@ -73,9 +86,46 @@ public class GameManager : Singleton<GameManager>
     }
     public void SpawnSchool()
     {
-        Transform spawnPoint = GameObject.Find("SpawnPoint").transform;
-        player.transform.position = spawnPoint.position;
+        Transform spawnPoint;
+        switch (level)
+        {
+            case 1:
+                spawnPoint = GameObject.Find("SpawnPoint").transform;
+                //spawnPoint = GameObject.Find("SpawnPoint1").transform;
+                player.transform.position = spawnPoint.position;
+                break;
+            case 2:
+                //spawnPoint = GameObject.Find("SpawnPoint2").transform;
+                //player.transform.position = spawnPoint.position;
+                break;
+            case 3:
+                //spawnPoint = GameObject.Find("SpawnPoint3").transform;
+                //player.transform.position = spawnPoint.position;
+                break;
+            default:
+                break;
+        }
     }
+    public void GoalIn()
+    {
+        success_game = true;
+        switch(level)
+        {
+            case 1:
+                clear_level1 = true;
+                break;
+            case 2:
+                clear_level2 = true;
+                break;
+            case 3:
+                clear_level3 = true;
+                break;
+            default:
+                break;
+        }
+        GameOver();
+    }
+
     public void GameOver()
     {
         Cursor.lockState = CursorLockMode.None;
@@ -85,20 +135,51 @@ public class GameManager : Singleton<GameManager>
         isHelmet = false;
         isWatch = false;
 
-        TimerManager.Instance.EndTime();
+        TimeManager.Instance.EndTime();
 
         Destroy(player);
         Destroy(follow_camera);
         Destroy(main_camera);
         Destroy(GameObject.Find("[HUD Navigation Canvas]"));
         Destroy(GameObject.Find("[HUD Navigation System]"));
-    }
 
+        SceneManager.LoadScene(4);
+    }
+    public bool GetResult()
+    {
+        return success_game;
+    }
+    public int GetLevel()
+    {
+        return level;
+    }
     public void StartLevel1()
     {
-        TimerManager.Instance.StartTime(100f);
+        TimeManager.Instance.StartTime(100f);
         SceneManager.LoadScene(3);
+        level = 1;
 
+        success_game = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+    public void StartLevel2()
+    {
+        TimeManager.Instance.StartTime(100f);
+        SceneManager.LoadScene(3);
+        level = 2;
+
+        success_game = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+    public void StartLevel3()
+    {
+        TimeManager.Instance.StartTime(100f);
+        SceneManager.LoadScene(3);
+        level = 3;
+
+        success_game = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }

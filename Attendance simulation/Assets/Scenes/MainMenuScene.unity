@@ -777,7 +777,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 241758892}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1481192817}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: StartLevel2
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &241758892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3690,7 +3702,7 @@ GameObject:
   - component: {fileID: 972455111}
   - component: {fileID: 972455110}
   m_Layer: 5
-  m_Name: TimerCanvas
+  m_Name: TimeCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5109,7 +5121,7 @@ GameObject:
   - component: {fileID: 1375229611}
   - component: {fileID: 1375229612}
   m_Layer: 0
-  m_Name: TimerManager
+  m_Name: TimeManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6605,7 +6617,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1921399919}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1481192817}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: StartLevel3
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1921399919
 MonoBehaviour:
   m_ObjectHideFlags: 0

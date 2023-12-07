@@ -4,7 +4,6 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
 using SickscoreGames.HUDNavigationSystem;
 using SickscoreGames.ExampleScene;
 
@@ -117,7 +116,7 @@ public class ExampleInteractions : MonoBehaviour
 					else if (element.gameObject.name == "PickUp Watch")
 					{
 						GameManager.Instance.TakeWatch();
-						TimerManager.Instance.ActiveTime();
+						TimeManager.Instance.ActiveTime();
 					}
 				}
 			}
@@ -154,7 +153,7 @@ public class ExampleInteractions : MonoBehaviour
 				// wait for interaction input and destroy gameobject
 				if (Input.GetKeyDown(KeyCode.E))
                 {
-					Destroy(element.gameObject);
+					GameObject.FindWithTag("vehicle").GetComponent<RideScooter>().RideTheScooter();
                 }
 			}
 		}
@@ -178,21 +177,21 @@ public class ExampleInteractions : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, interactionDistance, layerMask) 
 			&& hit.collider.name.Contains("Prism") && GameManager.Instance.isBackpack)
         {
-            // get HUD navigation element component
-            HUDNavigationElement element = hit.collider.gameObject.GetComponentInChildren<HUDNavigationElement>();
-            if (element != null)
-            {
-                // show interaction text
-                if (element.Indicator != null)
-                {
-                    interactionText = element.Indicator.GetCustomTransform("interactionText");
-                    if (interactionText != null)
-                        interactionText.gameObject.SetActive(true);
-                }
+			// get HUD navigation element component
+			HUDNavigationElement element = hit.collider.gameObject.GetComponentInChildren<HUDNavigationElement>();
+			if (element != null)
+			{
+				// show interaction text
+				if (element.Indicator != null)
+				{
+					interactionText = element.Indicator.GetCustomTransform("interactionText");
+					if (interactionText != null)
+						interactionText.gameObject.SetActive(true);
+				}
 
-                // wait for interaction input and change prism color
-                if (Input.GetKeyDown(KeyCode.E))
-                {
+				// wait for interaction input and change prism color
+				if (Input.GetKeyDown(KeyCode.E) && SceneManager.GetActiveScene().buildIndex != 1)
+				{
 					if (SceneManager.GetActiveScene().buildIndex == 3)
 					{
 						SceneManager.LoadScene(2);
@@ -201,9 +200,12 @@ public class ExampleInteractions : MonoBehaviour
 					{
 						SceneManager.LoadScene(1);
 					}
-					else if (SceneManager.GetActiveScene().buildIndex == 1)
-                    {
-						SceneManager.LoadScene(0);
+				}
+				else if (Input.GetKeyDown(KeyCode.E) && SceneManager.GetActiveScene().buildIndex == 1)
+				{	
+					if (hit.collider.name.Contains(GameManager.Instance.GetGoalClass()))
+					{
+						GameManager.Instance.GoalIn();
                     }
 				}
             }
