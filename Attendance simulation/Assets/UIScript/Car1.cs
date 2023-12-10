@@ -33,4 +33,11 @@ public class Car1 : MonoBehaviour
         // 생성된 게임 오브젝트 파괴
         Destroy(gameObject);
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            GameManager.Instance.GameOver();
+        }
+    }
 }

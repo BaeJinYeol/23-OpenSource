@@ -28,7 +28,7 @@ public class EnemyAI : MonoBehaviour
     private void Start()
     {
         nav = GetComponent<NavMeshAgent>();
-        nav.speed = 2.5f;
+        nav.speed = 3.8f;
 
         ani = GetComponent<Animator>();
         ani.SetBool("walk", true);
@@ -107,7 +107,7 @@ public class EnemyAI : MonoBehaviour
 
             // 플레이어가 AI의 공격 범위에 들어왔을 때, 수행되는 구문
             var target_dis = Vector3.Distance(this.transform.position, target.position);
-            if (target_dis < 0.16f && !hasAttacked)
+            if (target_dis < 0.3f && !hasAttacked)
             {
                 ani.SetBool("isExist", true);
                 hasAttacked = true;

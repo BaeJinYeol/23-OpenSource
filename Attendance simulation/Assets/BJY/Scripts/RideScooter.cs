@@ -21,14 +21,19 @@ public class RideScooter : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                player.GetComponent<StarterAssets.ThirdPersonController>().MoveSpeed = 2;
-                animator.SetBool("Scooter", false);
-                transform.parent = null;
-                GameManager.Instance.isRide = isRide = false;
+                GetOutScooter();
             }
         }
     }
-
+    public void GetOutScooter()
+    {
+        player.GetComponent<StarterAssets.ThirdPersonController>().MoveSpeed = 2;
+        animator.SetBool("Scooter", false);
+        transform.parent = null;
+        GameManager.Instance.isRide = isRide = false;
+        GameManager.Instance.UnTakeHelmet();
+        Destroy(gameObject);
+    }
     public void RideTheScooter()
     {
         GameManager.Instance.isRide = isRide = true;
@@ -40,5 +45,7 @@ public class RideScooter : MonoBehaviour
         transform.rotation = Quaternion.Euler(newRotation); 
         transform.parent = player.transform;
         player.GetComponent<StarterAssets.ThirdPersonController>().MoveSpeed = 12f;
+
+        Invoke("GetOutScooter", 10f);
     }
 }

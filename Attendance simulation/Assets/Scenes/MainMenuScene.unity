@@ -108,8 +108,8 @@ NavMeshSettings:
     agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
-    agentSlope: 45
-    agentClimb: 0.4
+    agentSlope: 40
+    agentClimb: 1
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: e83730d2e06d821458a40284c1e61e34, type: 2}
 --- !u!1 &58828982
 GameObject:
   m_ObjectHideFlags: 0
@@ -5385,9 +5385,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5bb1f2f71630094f8d376878dfde293, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: 0
   isBackpack: 0
   isHelmet: 0
   isWatch: 0
+  isRide: 0
 --- !u!114 &1481192818
 MonoBehaviour:
   m_ObjectHideFlags: 0

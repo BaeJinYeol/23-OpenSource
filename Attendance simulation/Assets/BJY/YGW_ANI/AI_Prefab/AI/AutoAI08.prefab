@@ -2290,11 +2290,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18a84b63ed7684b459bf7ba5d5732d67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
   ani: {fileID: 0}
   arrWaypoint: []
   n_Waypoint: 5
-  moveRange: 50
+  moveRange: 15
 --- !u!1 &187746
 GameObject:
   m_ObjectHideFlags: 0

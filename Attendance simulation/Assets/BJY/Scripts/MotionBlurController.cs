@@ -21,7 +21,6 @@ public class MotionBlurController : MonoBehaviour
     {
         // 현재 위치와 이전 위치의 차이 계산
         Vector3 velocity = (rb.position - previousPosition) / Time.fixedDeltaTime;
-        Debug.Log(Mathf.Lerp(0, 360, velocity.magnitude / maxSpeed));
         // 속도에 따라 모션 블러 강도 조절
         motionBlur.shutterAngle.value = Mathf.Lerp(0, 360, velocity.magnitude / maxSpeed);
         // 이전 위치 업데이트

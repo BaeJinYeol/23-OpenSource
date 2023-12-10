@@ -10,12 +10,9 @@ public class GameManager : Singleton<GameManager>
     private GameObject player;
 
     private int goalClass;
-    private int level;
     private bool success_game = false;
-    private bool clear_level1 = false;
-    private bool clear_level2 = false;
-    private bool clear_level3 = false;
 
+    public int level;
     public bool isBackpack = false;
     public bool isHelmet = false;
     public bool isWatch = false;
@@ -64,6 +61,11 @@ public class GameManager : Singleton<GameManager>
         GameObject.Find("mixamorig1:HeadTop_End").transform.Find("Helmet").gameObject.SetActive(true);
         isHelmet = true;
     }
+    public void UnTakeHelmet()
+    {
+        GameObject.Find("Helmet").gameObject.SetActive(false);
+        isHelmet = false;
+    }
     public void TakeWatch()
     {
         GameObject.Find("mixamorig1:LeftHand").transform.Find("Watch").gameObject.SetActive(true);
@@ -81,48 +83,39 @@ public class GameManager : Singleton<GameManager>
 
     public void SpawnYGW()
     {
-        Transform spawnPoint = GameObject.Find("SpawnPoints").transform;
-        player.transform.position = spawnPoint.position;
-    }
-    public void SpawnSchool()
-    {
         Transform spawnPoint;
         switch (level)
         {
             case 1:
-                spawnPoint = GameObject.Find("SpawnPoint").transform;
-                //spawnPoint = GameObject.Find("SpawnPoint1").transform;
+                spawnPoint = GameObject.Find("SpawnPoint1").transform;
                 player.transform.position = spawnPoint.position;
+                GameObject.Find("NPCs").transform.Find("NPC1").gameObject.SetActive(true);
                 break;
             case 2:
-                //spawnPoint = GameObject.Find("SpawnPoint2").transform;
-                //player.transform.position = spawnPoint.position;
+                spawnPoint = GameObject.Find("SpawnPoint2").transform;
+                player.transform.position = spawnPoint.position;
+                GameObject.Find("NPCs").transform.Find("NPC1").gameObject.SetActive(true);
+                GameObject.Find("NPCs").transform.Find("NPC2").gameObject.SetActive(true);
                 break;
             case 3:
-                //spawnPoint = GameObject.Find("SpawnPoint3").transform;
-                //player.transform.position = spawnPoint.position;
+                spawnPoint = GameObject.Find("SpawnPoint3").transform;
+                player.transform.position = spawnPoint.position;
+                GameObject.Find("NPCs").transform.Find("NPC1").gameObject.SetActive(true);
+                GameObject.Find("NPCs").transform.Find("NPC2").gameObject.SetActive(true);
+                GameObject.Find("NPCs").transform.Find("NPC3").gameObject.SetActive(true);
                 break;
             default:
                 break;
         }
     }
+    public void SpawnSchool()
+    {
+        Transform spawnPoint = GameObject.Find("SpawnPoint").transform;
+        player.transform.position = spawnPoint.position;
+    }
     public void GoalIn()
     {
         success_game = true;
-        switch(level)
-        {
-            case 1:
-                clear_level1 = true;
-                break;
-            case 2:
-                clear_level2 = true;
-                break;
-            case 3:
-                clear_level3 = true;
-                break;
-            default:
-                break;
-        }
         GameOver();
     }
 
@@ -155,7 +148,7 @@ public class GameManager : Singleton<GameManager>
     }
     public void StartLevel1()
     {
-        TimeManager.Instance.StartTime(100f);
+        TimeManager.Instance.StartTime(120f);
         SceneManager.LoadScene(3);
         level = 1;
 
@@ -165,7 +158,7 @@ public class GameManager : Singleton<GameManager>
     }
     public void StartLevel2()
     {
-        TimeManager.Instance.StartTime(100f);
+        TimeManager.Instance.StartTime(150f);
         SceneManager.LoadScene(3);
         level = 2;
 
@@ -175,7 +168,7 @@ public class GameManager : Singleton<GameManager>
     }
     public void StartLevel3()
     {
-        TimeManager.Instance.StartTime(100f);
+        TimeManager.Instance.StartTime(200f);
         SceneManager.LoadScene(3);
         level = 3;
 

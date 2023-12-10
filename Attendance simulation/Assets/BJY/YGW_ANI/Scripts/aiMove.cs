@@ -8,7 +8,7 @@ using StarterAssets;
 public class aiMove : MonoBehaviour
 {
     NavMeshAgent nav;
-    [SerializeField] Transform target;
+    Transform target;
 
     public Animator ani;
     public Vector3[] arrWaypoint;     // 이동할 위치를 저장하는 배열
@@ -34,7 +34,7 @@ public class aiMove : MonoBehaviour
     private void Start()
     {
         nav = GetComponent<NavMeshAgent>();
-        nav.speed = 2.5f;
+        nav.speed = 3.5f;
 
         ani = GetComponent<Animator>();
         ani.SetBool("walk", true);
@@ -113,7 +113,7 @@ public class aiMove : MonoBehaviour
 
             // 플레이어가 AI의 공격 범위에 들어왔을 때, 수행되는 구문
             var target_dis = Vector3.Distance(this.transform.position, target.position);
-            if (target_dis < 0.16f && !hasAttacked)
+            if (target_dis < 0.3f && !hasAttacked)
             {
                 ani.SetBool("isExist", true);
                 hasAttacked = true;

@@ -136,7 +136,7 @@ public class ExampleInteractions : MonoBehaviour
 
 		// check for pickup items
 		if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, interactionDistance, layerMask) 
-			&& hit.collider.name.Contains("Ride") && GameManager.Instance.isHelmet)
+			&& hit.collider.name.Contains("Ride") && GameManager.Instance.isHelmet && GameManager.Instance.isRide == false)
 		{
 			// get HUD navigation element component
 			HUDNavigationElement element = hit.collider.gameObject.GetComponent<HUDNavigationElement>();
@@ -153,7 +153,7 @@ public class ExampleInteractions : MonoBehaviour
 				// wait for interaction input and destroy gameobject
 				if (Input.GetKeyDown(KeyCode.E))
                 {
-					GameObject.FindWithTag("vehicle").GetComponent<RideScooter>().RideTheScooter();
+					hit.collider.gameObject.GetComponent<RideScooter>().RideTheScooter();
                 }
 			}
 		}

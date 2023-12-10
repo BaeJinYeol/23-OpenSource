@@ -3089,6 +3089,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2119871697438823683, guid: 51268a75daa5b714dabb75bd7c2274c6, type: 3}
+      propertyPath: SprintSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2119871697438823683, guid: 51268a75daa5b714dabb75bd7c2274c6, type: 3}
       propertyPath: LockCameraPosition
       value: 0
       objectReference: {fileID: 0}
