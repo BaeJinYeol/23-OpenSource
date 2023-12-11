@@ -8,7 +8,7 @@ public class GameManager : Singleton<GameManager>
     private GameObject main_camera;
     private GameObject follow_camera;
     private GameObject player;
-
+    private GameObject speedline_ui;
     private int goalClass;
     private bool success_game = false;
 
@@ -46,10 +46,12 @@ public class GameManager : Singleton<GameManager>
         main_camera = GameObject.Find("MainCamera");
         follow_camera = GameObject.Find("PlayerFollowCamera");
         player = GameObject.Find("Player");
+        speedline_ui = GameObject.Find("SpeedLine_UI");
 
         DontDestroyOnLoad(main_camera);
         DontDestroyOnLoad(follow_camera);
         DontDestroyOnLoad(player);
+        DontDestroyOnLoad(speedline_ui);
     }
     public void TakeBackPack()
     {

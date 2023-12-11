@@ -25,6 +25,7 @@ public class RideScooter : MonoBehaviour
             }
         }
     }
+
     public void GetOutScooter()
     {
         player.GetComponent<StarterAssets.ThirdPersonController>().MoveSpeed = 2;
@@ -42,7 +43,7 @@ public class RideScooter : MonoBehaviour
         Vector3 currentRotation = player.transform.rotation.eulerAngles;
         float newYRotation = currentRotation.y + 90f;
         Vector3 newRotation = new Vector3(currentRotation.x, newYRotation, currentRotation.z);
-        transform.rotation = Quaternion.Euler(newRotation); 
+        transform.rotation = Quaternion.Euler(newRotation);
         transform.parent = player.transform;
         player.GetComponent<StarterAssets.ThirdPersonController>().MoveSpeed = 12f;
 
