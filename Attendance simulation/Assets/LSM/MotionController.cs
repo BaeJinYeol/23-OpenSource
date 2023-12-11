@@ -9,16 +9,16 @@ public class MotionController : MonoBehaviour
     private MotionBlur motionBlur;
     private Rigidbody rb;
     private Vector3 previousPosition;
+    private Vector3 velocity;
+    
     private float maxSpeed;
-
-    private GameObject speedline_UI;
+    private float moveSpeedRatio;
     private RawImage rawimage;
-    private GameObject speedline_VideoPlayer;
     private VideoPlayer vp;
 
     void Start()
     {
-        //최대속도 초기화
+        //속도 관련 모듈 초기화
         maxSpeed = 16f;
 
         //모션 블러 관련 초기화
@@ -27,17 +27,16 @@ public class MotionController : MonoBehaviour
         previousPosition = rb.position;
 
         //SpeedLine 관련 초기화
-        speedline_UI = GameObject.Find("SpeedLine_UI");
+        GameObject speedline_UI = GameObject.Find("SpeedLine_UI");
         rawimage = speedline_UI.GetComponent<RawImage>();
-        speedline_VideoPlayer = GameObject.Find("SpeedLine_VideoPlayer");
+        GameObject speedline_VideoPlayer = GameObject.Find("SpeedLine_VideoPlayer");
         vp = speedline_VideoPlayer.GetComponent<VideoPlayer>();
     }
-    void FixedUpdate()
+    private void Update()
     {
-        //속도 구하기
-        Vector3 velocity = (rb.position - previousPosition) / Time.fixedDeltaTime;
-        float moveSpeedRatio = velocity.magnitude / maxSpeed;
-        Debug.Log(velocity.magnitude);
+        //속도 값 업데이트
+        moveSpeedRatio = velocity.magnitude / maxSpeed;
+
         //모션 블러 및 SpeedLine 적용
         motionBlur.shutterAngle.value = Mathf.Lerp(0, 360, moveSpeedRatio);
         vp.playbackSpeed = Mathf.Lerp(0.5f, 2f, moveSpeedRatio);
@@ -45,5 +44,12 @@ public class MotionController : MonoBehaviour
         
         //position 재설정
         previousPosition = rb.position;
+    }
+    
+    void FixedUpdate()
+    {
+        //속도 구하기
+        velocity = (rb.position - previousPosition) / Time.fixedDeltaTime;
+        Debug.Log(velocity.magnitude);
     }
 }

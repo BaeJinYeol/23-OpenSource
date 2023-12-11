@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8694335288453875812}
   - component: {fileID: 8694335288453875813}
   m_Layer: 0
-  m_Name: Scooter_SpeedLine_VideoPlayer
+  m_Name: SpeedLine_VideoPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
