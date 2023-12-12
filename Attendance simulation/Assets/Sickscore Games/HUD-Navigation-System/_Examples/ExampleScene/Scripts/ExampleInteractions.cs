@@ -79,6 +79,10 @@ public class ExampleInteractions : MonoBehaviour
 			if (blackWhiteLayer != null)
 				blackWhiteLayer.SetActive (!blackWhiteLayer.activeSelf);
 		}
+		if (Input.GetKeyDown(KeyCode.Escape))
+        {
+			GameManager.Instance.GameOver();
+        }
 	}
 
 	void HandleItemPickUp ()
