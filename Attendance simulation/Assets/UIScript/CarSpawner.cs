@@ -17,11 +17,6 @@ public class CarSpawner : MonoBehaviour
     {
         int randomIndex = Random.Range(0, carPrefabs.Length);
 
-        GameObject car = Instantiate(carPrefabs[randomIndex], transform.position, Quaternion.identity);
-
-        //car.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, moveSpeed);
-        //car.GetComponent<Rigidbody>().velocity = transform.forward * moveSpeed;
-
-        //Destroy(car, 20f);
+        Instantiate(carPrefabs[randomIndex], transform.position, Quaternion.identity);
     }
 }

@@ -31,7 +31,6 @@ public class MotionController : MonoBehaviour
     {
         //속도 구하기
         velocity = (rb.position - previousPosition) / Time.deltaTime;
-        Debug.Log(velocity.magnitude);
         
         //속도 값 업데이트
         moveSpeedRatio = velocity.magnitude / maxSpeed;

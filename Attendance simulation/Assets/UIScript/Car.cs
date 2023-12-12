@@ -5,13 +5,16 @@ using UnityEngine;
 public class Car : MonoBehaviour
 {
     public GameObject[] carPrefabs;
-    public Rigidbody rb;
     public float moveSpeed = 4f;
     public Vector3 direction = Vector3.forward;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        if (GetComponent<AudioSource>() != null)
+        {
+            GetComponent<AudioSource>().volume = SoundManager.Instance.bgVolume;
+            GetComponent<AudioSource>().spatialBlend = 1f;
+        }
         Invoke("DestroyObject", 32f);
     }
     private void FixedUpdate()

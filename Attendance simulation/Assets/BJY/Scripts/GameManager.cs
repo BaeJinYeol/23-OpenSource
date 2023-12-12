@@ -136,6 +136,7 @@ public class GameManager : Singleton<GameManager>
         Destroy(follow_camera);
         Destroy(main_camera);
         Destroy(GameObject.Find("SpeedLine_UI"));
+        Destroy(GameObject.Find("TimeCanvas"));
         Destroy(GameObject.Find("[HUD Navigation Canvas]"));
         Destroy(GameObject.Find("[HUD Navigation System]"));
 
@@ -161,7 +162,7 @@ public class GameManager : Singleton<GameManager>
     }
     public void StartLevel2()
     {
-        TimeManager.Instance.StartTime(150f);
+        TimeManager.Instance.StartTime(120f);
         SceneManager.LoadScene(3);
         level = 2;
 
@@ -171,7 +172,7 @@ public class GameManager : Singleton<GameManager>
     }
     public void StartLevel3()
     {
-        TimeManager.Instance.StartTime(200f);
+        TimeManager.Instance.StartTime(150f);
         SceneManager.LoadScene(3);
         level = 3;
 

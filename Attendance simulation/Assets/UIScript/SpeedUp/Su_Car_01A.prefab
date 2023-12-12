@@ -33147,7 +33147,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carPrefabs: []
-  rb: {fileID: 0}
   moveSpeed: 10
   direction: {x: 0, y: 0, z: 1}
 --- !u!43 &5822431527645707646

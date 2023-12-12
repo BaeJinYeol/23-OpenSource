@@ -7,12 +7,15 @@ public class RideScooter : MonoBehaviour
     private GameObject player;
     private Animator animator;
     private bool isRide;
+    private AudioSource wind_sound;
 
     void Start()
     {
         player = GameObject.FindWithTag("Player");
         animator = player.GetComponent<Animator>();
         isRide = false;
+        wind_sound = GetComponent<AudioSource>();
+        wind_sound.volume = SoundManager.Instance.bgSound.volume;
     }
 
     void Update()
@@ -31,8 +34,10 @@ public class RideScooter : MonoBehaviour
         player.GetComponent<StarterAssets.ThirdPersonController>().MoveSpeed = 2;
         animator.SetBool("Scooter", false);
         transform.parent = null;
+        wind_sound.Stop();
         GameManager.Instance.isRide = isRide = false;
         GameManager.Instance.UnTakeHelmet();
+
         Destroy(gameObject);
     }
     public void RideTheScooter()
@@ -46,6 +51,8 @@ public class RideScooter : MonoBehaviour
         transform.rotation = Quaternion.Euler(newRotation);
         transform.parent = player.transform;
         player.GetComponent<StarterAssets.ThirdPersonController>().MoveSpeed = 12f;
+
+        wind_sound.Play();
 
         Invoke("GetOutScooter", 13f);
     }

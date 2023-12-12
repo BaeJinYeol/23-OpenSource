@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 74951847}
   - component: {fileID: 74951846}
   m_Layer: 0
-  m_Name: OverSceneManager
+  m_Name: OverSceneController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -2,26 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SoundManager : Singleton<SoundManager>
 {
     public AudioSource bgSound;
     public AudioClip[] bglist;
-    public float bgVolume = 0.1f;
-    public float sfxVolume = 0.1f;
+    [SerializeField] private Slider sound_slider;
+    public float bgVolume = 0.5f;
+    public float sfxVolume = 0.5f;
+
+    private AudioSource city_sound;
+    private StarterAssets.ThirdPersonController player_Controller;
+
+    private void Start()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        PlayBgSound(bglist[0]);
+        sound_slider = GameObject.Find("Canvas").transform.Find("Audio").transform.Find("Slider").GetComponent<Slider>();
+    }
 
     public void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
-        for (int i = 0; i < bglist.Length; i++)
+        if (arg0.name == "Room")
         {
-            if (arg0.name == bglist[i].name)
-                PlayBgSound(bglist[i]);
+            player_Controller = GameObject.Find("Player").GetComponent<StarterAssets.ThirdPersonController>();
+            player_Controller.FootstepAudioVolume = bgVolume;
+            bgSound.Stop();
+
+        }
+        else if (arg0.name == "OverScene")
+        {
+            PlayBgSound(bglist[0]);
+            bgSound.volume = bgVolume;
+        }
+        else if (arg0.name == "MainMenuScene")
+        {
+            sound_slider = GameObject.Find("Canvas").transform.Find("Audio").transform.Find("Slider").GetComponent<Slider>();
         }
     }
 
-    public void SetBgVolume(float volume)
+    public void SetBgVolume()
     {
-        bgSound.volume = bgVolume = volume;
+        bgSound.volume = bgVolume = sound_slider.value;
     }
     public void SetSfxVolume(float volume)
     {

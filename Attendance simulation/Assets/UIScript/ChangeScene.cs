@@ -9,4 +9,17 @@ public class ChangeScene : MonoBehaviour
     {
         SceneManager.LoadScene(3);
     }
+    public void ClickLevel1()
+    {
+        GameManager.Instance.StartLevel1();
+    }
+    public void ClickLevel2()
+    {
+        GameManager.Instance.StartLevel2();
+    }
+    public void ClickLevel3()
+    {
+        GameManager.Instance.StartLevel3();
+    }
+
 }
