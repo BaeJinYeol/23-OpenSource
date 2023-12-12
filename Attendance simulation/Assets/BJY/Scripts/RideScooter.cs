@@ -47,6 +47,6 @@ public class RideScooter : MonoBehaviour
         transform.parent = player.transform;
         player.GetComponent<StarterAssets.ThirdPersonController>().MoveSpeed = 12f;
 
-        Invoke("GetOutScooter", 10f);
+        Invoke("GetOutScooter", 13f);
     }
 }

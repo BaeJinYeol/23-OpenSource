@@ -10,46 +10,39 @@ public class MotionController : MonoBehaviour
     private Rigidbody rb;
     private Vector3 previousPosition;
     private Vector3 velocity;
-    
+
     private float maxSpeed;
     private float moveSpeedRatio;
     private RawImage rawimage;
-    private VideoPlayer vp;
-
     void Start()
     {
         //속도 관련 모듈 초기화
-        maxSpeed = 16f;
+        maxSpeed = 17f;
 
         //모션 블러 관련 초기화
         postProcessVolume.profile.TryGetSettings(out motionBlur);
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponentInChildren<Rigidbody>();
         previousPosition = rb.position;
 
         //SpeedLine 관련 초기화
-        GameObject speedline_UI = GameObject.Find("SpeedLine_UI");
-        rawimage = speedline_UI.GetComponent<RawImage>();
-        GameObject speedline_VideoPlayer = GameObject.Find("SpeedLine_VideoPlayer");
-        vp = speedline_VideoPlayer.GetComponent<VideoPlayer>();
+        rawimage = GameObject.Find("SpeedLine_UI").GetComponent<RawImage>();
     }
     private void Update()
     {
+        //속도 구하기
+        velocity = (rb.position - previousPosition) / Time.deltaTime;
+        Debug.Log(velocity.magnitude);
+        
         //속도 값 업데이트
         moveSpeedRatio = velocity.magnitude / maxSpeed;
 
         //모션 블러 및 SpeedLine 적용
-        motionBlur.shutterAngle.value = Mathf.Lerp(0, 360, moveSpeedRatio);
-        vp.playbackSpeed = Mathf.Lerp(0.5f, 2f, moveSpeedRatio);
-        rawimage.color = new Color(1f, 1f, 1f, Mathf.Lerp(0f, 1f, moveSpeedRatio));
-        
+        motionBlur.shutterAngle.value = Mathf.Lerp(0, 100, moveSpeedRatio);
+        if (GameManager.Instance.isRide)
+            rawimage.color = new Color(1f, 1f, 1f, Mathf.Lerp(0f, 0.5f, moveSpeedRatio));
+        else
+            rawimage.color = new Color(1f, 1f, 1f, 0f);
         //position 재설정
         previousPosition = rb.position;
-    }
-    
-    void FixedUpdate()
-    {
-        //속도 구하기
-        velocity = (rb.position - previousPosition) / Time.fixedDeltaTime;
-        Debug.Log(velocity.magnitude);
     }
 }

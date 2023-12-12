@@ -34,7 +34,7 @@ public class aiMove : MonoBehaviour
     private void Start()
     {
         nav = GetComponent<NavMeshAgent>();
-        nav.speed = 3.5f;
+        nav.speed = 3.8f;
 
         ani = GetComponent<Animator>();
         ani.SetBool("walk", true);
