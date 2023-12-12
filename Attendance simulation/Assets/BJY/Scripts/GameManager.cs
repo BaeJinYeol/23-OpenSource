@@ -136,7 +136,6 @@ public class GameManager : Singleton<GameManager>
         Destroy(follow_camera);
         Destroy(main_camera);
         Destroy(GameObject.Find("SpeedLine_UI"));
-        Destroy(GameObject.Find("TimeCanvas"));
         Destroy(GameObject.Find("[HUD Navigation Canvas]"));
         Destroy(GameObject.Find("[HUD Navigation System]"));
 
