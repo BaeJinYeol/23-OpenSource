@@ -8,11 +8,11 @@ using UnityEngine.SceneManagement;
 public class TimeManager : Singleton<TimeManager>
 {
     [SerializeField]
-    private GameObject timerCanvas;
+    private GameObject timerBg;
     [SerializeField]
     private TMP_Text time_text;
 
-    private Image timer_bg;
+    private Image timerBg_image;
     private Color default_color = Color.HSVToRGB(207f / 360f, 1f, 1f);
 
     private float time;
@@ -20,10 +20,9 @@ public class TimeManager : Singleton<TimeManager>
 
     private void Start()
     {
-        timer_bg = timerCanvas.GetComponentInChildren<Image>();
-        timer_bg.color = default_color;
-        DontDestroyOnLoad(timerCanvas);
-        timerCanvas.SetActive(false);
+        timerBg_image = timerBg.GetComponent<Image>();
+        timerBg_image.color = default_color;
+        timerBg.SetActive(false);
     }
 
     private void Update()
@@ -34,11 +33,11 @@ public class TimeManager : Singleton<TimeManager>
             SetTimeCanvas();
             if (time <= 40f && time > 20f)
             {
-                timer_bg.color = Color.yellow;
+                timerBg_image.color = Color.yellow;
             }
             else if (time <= 20f && time > 0f)
             {
-                timer_bg.color = Color.red;
+                timerBg_image.color = Color.red;
             }
             else if (time <= 0f)
             {
@@ -51,18 +50,18 @@ public class TimeManager : Singleton<TimeManager>
     {
         time = sec;
         isTime = true; 
-        timer_bg.color = default_color;
+        timerBg_image.color = default_color;
     }
 
     public void EndTime()
     {
         isTime = false;
-        timerCanvas.SetActive(false);
+        timerBg.SetActive(false);
     }
 
     public void ActiveTime()
     {
-        timerCanvas.SetActive(true);
+        timerBg.SetActive(true);
     }
 
     private void SetTimeCanvas()
