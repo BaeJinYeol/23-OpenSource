@@ -56,3 +56,10 @@ ___
 ## 데모 영상
 [![데모 영상](https://img.youtube.com/vi/NtobHvVS_44/0.jpg)](https://www.youtube.com/watch?v=NtobHvVS_44) <br/>
 (클릭하면 유튜브 영상으로 이동)
+<br/>
+### 출처
+- 배경 음원 출처 
+Song : Have - Horror <br/>
+Follow Artist : https://bit.ly/2XacoBJ <br/>
+Music promoted by DayDreamSound : https://bit.ly/3mM1lyH <br/>
+유튜브 링크 : https://www.youtube.com/watch?v=03KIKoVMTCQ&ab_channel=%EB%8D%B0%EC%9D%B4%EB%93%9C%EB%A6%BC%EC%82%AC%EC%9A%B4%EB%93%9CDayDreamSound
