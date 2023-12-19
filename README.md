@@ -55,3 +55,5 @@ ___
 
 ## 데모 영상
 ![유튜브 링크](https://github.com/BaeJinYeol/23-OpenSource/assets/108410316/696c4c80-bb95-426f-b292-61d29f8d389b)(https://www.youtube.com/watch?v=NtobHvVS_44)
+[![데모 영상](https://img.youtube.com/vi/NtobHvVS_44.jpg)](https://www.youtube.com/watch?v=NtobHvVS_44) <br/>
+(클릭하면 유튜브 영상으로 이동)
